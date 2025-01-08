@@ -1,12 +1,11 @@
 # samsung-riscv
-# samsung-riscv
 ##  Basic Details
 
-*Name:* Anup Nagaraj Janmane  
+*Name:* Vaibhavi Birajdar  
 *College:* KLE Institue of Technology  
-*Email ID:* anupjanmane18@gmail.com  
-*GitHub Profile:* [Anup_janmane_Github](https://github.com/anupjanmane18)  
-*LinkedIN Profile:* [Anup_Janmane](https://www.linkedin.com/in/anup-janmane-a960b325b/)
+*Email ID:* vaibhavibirajdar25@gmail.com  
+*GitHub Profile:* [Vaibhavi_Birajdar_Github](https://github.com/vaibhavibirajdar07)  
+*LinkedIN Profile:* [Vaibhavi Birajdar](https://www.linkedin.com/in/vaibhavi-birajdar-915650258/)
 
 ----------------------------------------------------------------------------------------------------------------
 
@@ -28,11 +27,11 @@ Initial task is:-
 
 we have written the code sum of 1st 5 numbers in leafpad as shown below.
 
-
+```
 gcc sum_1ton.c
 
 ./a.out
-
+```
 
 this code will be run in terminal to get output as 15 for 1st 5 numbers as shown below :
 
@@ -43,49 +42,49 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 
 1. Using the cat command, the entire C code will be displayed on the terminal.
    
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task1/cat%20Command.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/cat%20Command.png)
 
 2. A program is run to obtain risc-v version of the code previously written in c:
 
-  	 
+  	```
 	riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum_1ton.o sum_1ton.c
-	
+	```
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task1/RISCV_C_CODE_O1.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/RISCV_C_CODE_O1.png)
 
 
 3. As the whole version of above code looks lengthier we have used below code to make it shorter
 	
- 	
+ 	```
 	riscv64 -unknown-elf-objdump -d sum1ton.o | less
-	
+	```
  
 & we have obtained the required main part to compare the execution in assembly language as shown below :
 
 	
  
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task1/Objdump%20using%20-O1%20format.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/Objdump%20using%20-O1%20format.png)
 
 4. Open the same terminal and run the given command:
  
- 	
+ 	```
 	riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum_1ton.o sum_1ton.c
-	 
+	 ```
 
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task1/RISCV_CODE_Ofast.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/RISCV_CODE_Ofast.png)
 
 5. As the whole version of above code looks lengthier as earlier we have used below code to make it shorter
 	
- 	
+ 	```
 	riscv64 -unknown-elf-objdump -d sum1ton.o | less
-	
+	```
  
 & we have obtained the required main part to compare the execution in assembly language as shown below :
 
 
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task1/Objdump%20using%20-Ofast%20format.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/Objdump%20using%20-Ofast%20format.png)
 
 ### End of 1st task
 </details>
