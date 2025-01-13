@@ -86,3 +86,80 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 </details>
 
 ------------------------------------------------------------------------------------------------------------------
+<details>
+<summary><b>Task 2:</b> Performing SPIKE Simulation and Debugging the C code with Interactive Debugging Mode using Spike.
+	
+I understood the principle and working of the whole program and how various registers like stack pointer and r5 are increasing.
+</summary> 
+
+
+### Testing the SPIKE Simulator for sum1ton.c
+**spike_O1_objdump**
+
+* Here we are compare both of the compiler that must display the same output on the terminal.
+* after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_O1_objdump_for_sum1ton.png)
+
+* In the above picture registor a0 earlier has value 21000 in hex decimal.
+* After running the registor a0 became 21180 in hexa decimal.
+* * Because there has +384 in decimal,so after calculation it gives the above value 
+
+**Spike_Ofast_objdump**
+
+* Here also goes the same we compare both of the compiler that must display the same output on the terminal.
+* after that we are gona debug the sum1ton.c of **-Ofast_format** using SPIKE simulator
+
+
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_Ofast_objdump_for_sum1ton.png)
+
+* In the above picture registor sp earlier has value 3ffffffb50 in hex decimal.
+* After running the registor a0 became 3ffffffb40 in hexa decimal.
+* Because there has -16 in decimal,so after calculation it gives the above value.
+
+### Area of a Circle (C program):
+
+**Here i have used radius as 5**
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/c_code_for_mult_on_gcc_Compiler.png)
+
+**riscv_objdump_O1_format**
+
+* we have obtained the required main part to compare the execution in assembly language as shown below :
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/Objdump_using%20-O1_format_for_mult.png)
+
+**riscv_objdump_Ofast_format**
+
+* we have obtained the required main part to compare the execution in assembly language as shown below :
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/Objdump_using%20-Ofast_format_for_mult.png)
+
+
+### Testing the SPIKE Simulator for new c program i.e mult1ton.c
+**spike_O1_objdump**
+
+* Here we are compare both of the compiler that must display the same output on the terminal.
+* after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_O1_objdump_for_mult1ton.png)
+
+
+
+**Spike_Ofast_objdump**
+
+* Here also goes the same we compare both of the compiler that must display the same output on the terminal.
+* after that we are gona debug the sum1ton.c of **-Ofast_format** using SPIKE simulator
+
+
+
+![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_Ofast_objdump_for_mult1ton.png)
+
+
+
+
+### End of 2nd task
+</details>
+
+------------------------------------------------------------------------------------------------------------------
