@@ -122,19 +122,19 @@ I understood the principle and working of the whole program and how various regi
 
 **Here i have used radius as 5**
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/c_code_for_mult_on_gcc_Compiler.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/C_code_for_area_of_circle.png)
 
 **riscv_objdump_O1_format**
 
 * we have obtained the required main part to compare the execution in assembly language as shown below :
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/Objdump_using%20-O1_format_for_mult.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/Objdump_using%20-O1_format_for_area_of_circle.png)
 
 **riscv_objdump_Ofast_format**
 
 * we have obtained the required main part to compare the execution in assembly language as shown below :
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/Objdump_using%20-Ofast_format_for_mult.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/Objdump_using%20-Ofast_format_for_area_of_circle.png)
 
 
 ### Testing the SPIKE Simulator for new c program i.e mult1ton.c
@@ -143,7 +143,7 @@ I understood the principle and working of the whole program and how various regi
 * Here we are compare both of the compiler that must display the same output on the terminal.
 * after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_O1_objdump_for_mult1ton.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/spike_O1_objdump_for_area_of_circle.png)
 
 
 
@@ -154,7 +154,7 @@ I understood the principle and working of the whole program and how various regi
 
 
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_Ofast_objdump_for_mult1ton.png)
+![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/spike_Ofast_objdump_for_area_of_circle.png)
 
 
 
