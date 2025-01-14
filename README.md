@@ -99,7 +99,8 @@ I understood the principle and working of the whole program and how various regi
 * Here we are compare both of the compiler that must display the same output on the terminal.
 * after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_O1_objdump_for_sum1ton.png)
+![spike_O1_objdump_for_sum1ton](https://github.com/user-attachments/assets/7dd97a0f-66ea-4d65-9358-1d86ed5d97d6)
+
 
 * In the above picture registor a0 earlier has value 21000 in hex decimal.
 * After running the registor a0 became 21180 in hexa decimal.
@@ -112,7 +113,8 @@ I understood the principle and working of the whole program and how various regi
 
 
 
-![image](https://github.com/anupjanmane18/samsung-riscv/blob/main/task2/spike_Ofast_objdump_for_sum1ton.png)
+![spike_Ofast_objdump_for_sum1ton](https://github.com/user-attachments/assets/9dd161a1-87c4-4966-b8ba-a1156ccd0468)
+
 
 * In the above picture registor sp earlier has value 3ffffffb50 in hex decimal.
 * After running the registor a0 became 3ffffffb40 in hexa decimal.
@@ -122,19 +124,22 @@ I understood the principle and working of the whole program and how various regi
 
 **Here i have used radius as 5**
 
-![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/C_code_for_area_of_circle.png)
+![C_code_for_area_of_circle](https://github.com/user-attachments/assets/44008e2b-8b68-4e3d-80ea-c9dcbfda2e75)
+
 
 **riscv_objdump_O1_format**
 
 * we have obtained the required main part to compare the execution in assembly language as shown below :
 
-![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/Objdump_using%20-O1_format_for_area_of_circle.png)
+![Objdump_using -O1_format_for_area_of_circle](https://github.com/user-attachments/assets/867d7380-a905-45b1-9ec8-8719711d92e6)
+
 
 **riscv_objdump_Ofast_format**
 
 * we have obtained the required main part to compare the execution in assembly language as shown below :
 
-![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/Objdump_using%20-Ofast_format_for_area_of_circle.png)
+![Objdump_using -Ofast_format_for_area_of_circle](https://github.com/user-attachments/assets/02104142-0d36-4568-ab24-b0db32ecdda6)
+
 
 
 ### Testing the SPIKE Simulator for new c program i.e mult1ton.c
@@ -143,7 +148,8 @@ I understood the principle and working of the whole program and how various regi
 * Here we are compare both of the compiler that must display the same output on the terminal.
 * after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
 
-![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/spike_O1_objdump_for_area_of_circle.png)
+![spike_O1_objdump_for_area_of_circle](https://github.com/user-attachments/assets/fa2ac77f-b38a-42b8-989c-7d770e92fd8f)
+
 
 
 
@@ -154,7 +160,8 @@ I understood the principle and working of the whole program and how various regi
 
 
 
-![image](https://github.com/vaibhavibirajdar07/samsung-risc-v/blob/main/spike_Ofast_objdump_for_area_of_circle.png)
+![spike_Ofast_objdump_for_area_of_circle](https://github.com/user-attachments/assets/3873cf6d-9bd1-4a00-9d82-e1b28154adc9)
+
 
 
 
@@ -182,7 +189,9 @@ There are 6 instruction formats in RISC-V:
 * In R-type instruction, R stands for register
 * This instruction type is used to execute various arithmetic and logical operations.
 * The entire 32 bits instruction is divided into 6 fields as shown below.
-![R-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/R_type_instruction.png)
+  
+![R_type_instruction](https://github.com/user-attachments/assets/40019a97-4382-4a4d-bac6-5741cbec3a4d)
+
 
 ### 2. I-type Instruction  
 * In RV32, each instruction is of size 32 bits.
@@ -190,7 +199,8 @@ There are 6 instruction formats in RISC-V:
 * This instruction type is used in immediate and load operations.
 *  The entire 32 bits instruction is divided into 5 fields as shown below.
 
-![I-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/I_type_instruction.png)
+![I_type_instruction](https://github.com/user-attachments/assets/9f047b6c-85dd-4b55-bb54-b0281ec88d99)
+
 
 **Example: ADDI rd, rs1, imm**
 
@@ -202,7 +212,7 @@ There are 6 instruction formats in RISC-V:
 *  Mainly, this instruction type is used for store operations.
 *  The entire 32 bits instruction is divided into 6 fields as shown below.  
   
-![s-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/S_type_instruction.png)
+![S_type_instruction](https://github.com/user-attachments/assets/cfa71fc0-57c0-470a-8ceb-8b85c0dbe278)
 
 **Example: SW rs2, imm(rs1)**
 
@@ -212,7 +222,8 @@ There are 6 instruction formats in RISC-V:
 * In B-type instruction, B stand for branching which means it is mainly used for branching based on certain conditions.
 *  The entire 32 bits instruction is divided into 8 fields as shown below.  
   
-![B-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/B_type_instruction.png)
+![B_type_instruction](https://github.com/user-attachments/assets/6f63892d-3b45-4f6f-a685-3c3e8e6715fa)
+
 
 **Example: BEQ rs1, rs2, imm**   
  
@@ -222,7 +233,9 @@ There are 6 instruction formats in RISC-V:
 *  In U-type instruction, U stand for Upper Immediate instructions which means it is simply used to transfer the immediate data into the destination register.
 *  The entire 32 bits instruction is divided into 3 fields as shown below.  
   
-![u-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/U_type_instruction.png)
+![U_type_instruction](https://github.com/user-attachments/assets/716b8c11-8251-4519-a881-54840e626616)
+
+
 
 **Example: LUI rd, imm**   
 
@@ -232,7 +245,8 @@ There are 6 instruction formats in RISC-V:
 * In J-type instruction, J stand for jump, which means that this instruction format is used to implement jump type instruction.
 *  The entire 32 bits instruction is divided into 6 fields as shown below.  
   
-![j-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/J_type_instruction.png)
+![J_type_instruction](https://github.com/user-attachments/assets/7f1bdd8f-06d0-48ed-a3c7-528b2cda17cd)
+
 
 **Example: JAL rd, imm**
 
@@ -340,7 +354,9 @@ BEQ a5, x0, offset**
 7. LUI a0 0x21 
 
 
-![U-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/LUI_U_type.png)
+
+![U_type](https://github.com/user-attachments/assets/c27d0aee-79b4-4550-97c4-fb407e604869)
+
 
 > * In this instruction LUI means Load Upper Immediate,
 > *  hence this instruction belongs to U-type instruction set.
@@ -353,7 +369,7 @@ BEQ a5, x0, offset**
 
 8. JAL ra 10408 <printf>
 
-![J-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/JAL_J_type.png)
+![J_type](https://github.com/user-attachments/assets/ed8c976f-f2a3-43cb-8bd0-32c46f7db684)
 
 > * In this instruction JAL means Jump and Link,
 > *  hence this instruction belongs to J-type instruction set.
@@ -366,7 +382,8 @@ BEQ a5, x0, offset**
 
 9. SD ra 8(sp) 
 
-![S-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/SD_S_type.png)
+![S_type](https://github.com/user-attachments/assets/6603a9a5-4804-4ff8-9099-cad8a7440174)
+
 
 > * In this instruction SD means store doubleword instruction,
 > *  hence this instruction belongs to S-type instruction set.  
@@ -458,7 +475,8 @@ BEQ a5, x0, offset**
 
 15. ADDI sp, sp, -16  
 
-![I-type](https://github.com/anupjanmane18/samsung-riscv/blob/main/task3/ADDI_I_type.png)
+![I_type](https://github.com/user-attachments/assets/8ebbb5e4-a5df-4fde-915a-ce4957241968)
+
 
 > * In this instruction ADDI means Addition, I means Immediate,
 > * hence this instruction belongs to I-type instruction set.
