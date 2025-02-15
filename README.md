@@ -517,10 +517,10 @@ Reference GitHub repo is [![GitHub](https://img.shields.io/badge/-GitHub-181717?
   -  run the below code in cmd 
 
   ```
-   git clone https://github.com/anupjanmane18/vaibhavi
+   git clone https://github.com/vaibhavibirajdar07/vaibhavi
    ```
 
-* Chanding the working directory to `anup` using the following comand:
+* Chanding the working directory to `vaibhavi` using the following comand:
   ```
    cd vaibhavi
   ```
