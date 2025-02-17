@@ -795,6 +795,9 @@ Here is the components list:
 | 1 | 1 | 0 | 1 | 0 | 0 |
 | 1 | 1 | 1 | 1 | 0 | 1 |
 
+### End of 5th task
+</details>
+------------------------------------------------------------------------------------------------------------------
 
 <details>
    <summary><b>Task 6: Working Code & short video demonstration .</summary>
