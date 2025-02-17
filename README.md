@@ -727,5 +727,305 @@ Reference GitHub repo is [![GitHub](https://img.shields.io/badge/-GitHub-181717?
 </details>
 
 ------------------------------------------------------------------------------------------------------------------
+<details>
+   <summary><b>Task 5:Overview, Components Required, Operational Workflow, Applications, Circuit Connection, Pinout Diagram and Table for Pin connection required to build the display driver.</summary>
+
+# Digital Object Counter using VSDSquadron Mini
+
+## Overview
+This project implements a microcontroller-based system to convert Gray code to binary and display the result on an I2C LCD. The system reads 3-bit binary inputs from GPIO pins, converts them from Gray code to binary using a custom algorithm, and outputs the results on the LCD. The system also supports optional reset functionality through push buttons. The code utilizes direct I2C communication to control the LCD and uses GPIO for input reading. This application is useful in scenarios such as position sensing, encoders, and digital counters where Gray code is commonly used to minimize errors during transitions.
+
+## Components Required
+Here is the components list :
+
+Here is the updated table:  
+
+| **S.No** | **Component**              | **Function**                          |  
+|---------|--------------------------|--------------------------------------|  
+| 1       | VSD Squadron Mini Board  | Microcontroller for processing data  |   
+| 2       | I2C LCD Display          | Displays the object count            |  
+| 3       | Push Buttons             | Resets the count when pressed        |  
+| 4       | Power Supply (5V or Battery) | Provides power to the system         |   
+
+## Operational Workflow:
+* The microcontroller reads binary inputs representing Gray code from sensors. It then converts the Gray code to binary using the gray_to_binary function. Finally, the binary values are displayed on the LCD for monitoring or further processing.
+
+## Applications:
+* ✔ Gray code to binary conversion is useful in applications like rotary encoders for position sensing, where minimizing errors during bit transitions is critical. It helps decode Gray code outputs into binary for easier interpretation and processing. This is essential in systems like motion control, digital counters, and communication protocols.
+
+## Circuit Connection
+## 🔗 Connection Table: Digital Object Counter using VSD Squadron Mini Board  
 
 
+| **Component**               | **Pin on Component** | **Connected to (VSD Squadron Mini Board)** |
+|-----------------------------|---------------------|---------------------------------------------|
+| 🟢 **IR Sensor**            | **VCC**             | **5V**                                     |
+|                             | **GND**             | **GND**                                    |
+|                             | **OUT**             | **PD6 (GPIO_Pin_6)**                       |
+| 🟡 **I2C LCD Display (PCF8574)** | **SDA**             | **PC1 (GPIO_Pin_1)**                       |
+|                             | **SCL**             | **PC2 (GPIO_Pin_2)**                       |
+|                             | **VCC**             | **5V**                                     |
+|                             | **GND**             | **GND**                                    |
+| 🔴 **Buzzer**               | **Positive (+)**    | **PD5 (GPIO_Pin_5)**                       |
+|                             | **Negative (-)**    | **GND**                                    |
+| 🔵 **Push Button (Reset)**  | **One Terminal**    | **GND**                                    |
+|                             | **Other Terminal**  | **PD1 (GPIO_Pin_1)**                       |
+
+
+
+## Pinout Diagram for the project
+The following diagram represents the pin configuration for the Digital Object Counter using the VSD Squadron Mini
+
+![block diagram object counter](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%205/Screenshot%202025-02-17%20223432.png)
+
+
+### End of 5th task
+</details>
+
+------------------------------------------------------------------------------------------------------------------
+
+<details>
+   <summary><b>Task 6: Working Code & short video demonstration .</summary>
+
+
+## Code uploaded on the board
+```
+#include <ch32v00x.h>
+#include <debug.h>
+#include <ch32v00x_gpio.h>
+#include <stdio.h> // Include for snprintf
+
+// I2C LCD Configuration
+#define SDA_PIN GPIO_Pin_1
+#define SCL_PIN GPIO_Pin_2
+#define LCD_Address 0x27
+//#define RESET_BUTTON_PIN GPIO_Pin_1 // Pin for the reset button
+//#define COUNT_RESET_BUTTON_PIN GPIO_Pin_0 // Pin for the count reset button
+
+void lcd_send_cmd(unsigned char cmd);
+void lcd_send_data(unsigned char data);
+void lcd_send_str(unsigned char *str); // Change to char*
+void lcd_init(void);
+void delay_ms(unsigned int ms);
+void GPIO_INIT(void);
+void check_reset_button(void);
+void check_count_reset_button(uint8_t *g0, uint8_t *g1, uint8_t *g2);
+
+// Function to produce a delay
+void delay_ms(unsigned int ms) {
+    for (unsigned int i = 0; i < ms; i++) {
+        for (unsigned int j = 0; j < 8000; j++) {
+            __NOP();
+        }
+    }
+}
+
+// Function to initialize GPIO pins
+void GPIO_INIT(void) {
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD | RCC_APB2Periph_GPIOC, ENABLE);
+
+    // Reset button
+    //GPIO_InitStructure.GPIO_Pin = RESET_BUTTON_PIN;
+    //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; // Input Pull-Up
+    //GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+    // Count reset button
+    //GPIO_InitStructure.GPIO_Pin = COUNT_RESET_BUTTON_PIN;
+    //GPIO_Init(GPIOD, &GPIO_InitStructure);
+
+    // I2C Pins
+    GPIO_InitStructure.GPIO_Pin = SDA_PIN | SCL_PIN;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_OD;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+    // Input Pins (b0, b1, b2)
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4 | GPIO_Pin_5 | GPIO_Pin_6;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_Init(GPIOD, &GPIO_InitStructure);
+}
+
+// I2C Functions
+void i2c_write(unsigned char dat) {
+    for (unsigned char i = 0; i < 8; i++) {
+        GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+        GPIO_WriteBit(GPIOC, SDA_PIN, (dat & (0x80 >> i)) ? Bit_SET : Bit_RESET);
+        GPIO_WriteBit(GPIOC, SCL_PIN, Bit_SET);
+    }
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+}
+
+void i2c_start(void) {
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_SET);
+    GPIO_WriteBit(GPIOC, SDA_PIN, Bit_SET);
+    delay_ms(1);
+    GPIO_WriteBit(GPIOC, SDA_PIN, Bit_RESET);
+    delay_ms(1);
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+}
+
+void i2c_stop(void) {
+    GPIO_WriteBit(GPIOC, SDA_PIN, Bit_RESET);
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+    delay_ms(1);
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_SET);
+    delay_ms(1);
+    GPIO_WriteBit(GPIOC, SDA_PIN, Bit_SET);
+}
+
+int i2c_ACK(void) {
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+    GPIO_WriteBit(GPIOC, SDA_PIN, Bit_SET);
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_SET);
+    int ack = GPIO_ReadInputDataBit(GPIOC, SDA_PIN);
+    GPIO_WriteBit(GPIOC, SCL_PIN, Bit_RESET);
+    return ack; // Return 0 if ACK received, 1 if not
+}
+
+// LCD Functions
+void lcd_send_cmd(unsigned char cmd) {
+    unsigned char cmd_l = (cmd << 4) & 0xf0;
+    unsigned char cmd_u = cmd & 0xf0;
+
+    i2c_start();
+    i2c_write(LCD_Address << 1);
+    if (i2c_ACK()) return; // Check for ACK
+    i2c_write(cmd_u | 0x0C);
+    i2c_ACK();
+    i2c_write(cmd_u | 0x08);
+    i2c_ACK();
+    delay_ms(1);
+    i2c_write(cmd_l | 0x0C);
+    i2c_ACK();
+    i2c_write(cmd_l | 0x08);
+    i2c_ACK();
+    delay_ms(1);
+    i2c_stop();
+}
+
+void lcd_send_data(unsigned char data) {
+    unsigned char data_l = (data << 4) & 0xf0;
+    unsigned char data_u = data & 0xf0;
+
+    i2c_start();
+    i2c_write(LCD_Address << 1);
+    if (i2c_ACK()) return; // Check for ACK
+    i2c_write(data_u | 0x0D);
+    i2c_ACK();
+    i2c_write(data_u | 0x09);
+    i2c_ACK();
+    delay_ms(1);
+    i2c_write(data_l | 0x0D);
+    i2c_ACK();
+    i2c_write(data_l | 0x09);
+    i2c_ACK();
+    delay_ms(1);
+    i2c_stop();
+}
+
+void lcd_send_str(unsigned char *str) { // Change to char*
+    while (*str) {
+        lcd_send_data(*str++);
+    }
+}
+
+void lcd_init(void) {
+    lcd_send_cmd(0x02); // Initialize LCD in 4-bit mode
+    lcd_send_cmd(0x28); // 2 lines, 5x7 matrix
+    lcd_send_cmd(0x0C); // Display ON, Cursor OFF
+    lcd_send_cmd(0x06); // Entry mode set
+    lcd_send_cmd(0x01); // Clear display
+    delay_ms(20);
+}
+
+// Gray to Binary Conversion Function
+void gray_to_binary(uint8_t g0, uint8_t g1, uint8_t g2, uint8_t *b0, uint8_t *b1, uint8_t *b2) {
+    *b0 = g0^g1 ^ g2;  // Binary[0] = Gray[0] XOR Gray[1] XOR Gray[2]
+    *b1 = g1 ^ g2;  // Binary[1] = Gray[1] XOR Gray[2]
+    *b2 = g2;  // Binary[2] =  Gray[2]
+}
+
+// Function to display Gray to Binary results on LCD
+void Display_Gray_to_Binary(uint8_t g0, uint8_t g1, uint8_t g2, uint8_t b0, uint8_t b1, uint8_t b2) {
+    lcd_send_cmd(0x80);  // First row, first column
+    unsigned char output[16] = "G0 G1 G2B0 B1 B2";
+    lcd_send_str(output);
+
+    lcd_send_cmd(0xC0);  // Move to second row
+    unsigned char output_str[16]; // Declare the output string
+    sprintf((char*)output_str, "%d  %d  %d  %d  %d  %d", g2, g1, g0, b2, b1, b0); // Format the string
+    lcd_send_str(output_str);
+}
+
+// Function to check the reset button
+/*void check_reset_button(void) {
+    if (GPIO_ReadInputDataBit(GPIOD, RESET_BUTTON_PIN) == Bit_RESET) { // Reset button pressed
+        delay_ms(50); // Simple debounce
+        lcd_init(); // Reset the LCD
+        lcd_send_cmd(0x80);  // First row, first column
+        unsigned char input[16] = "b0 b1 b2 ";
+        lcd_send_str(input);
+    }
+}
+
+// Function to check the count reset button
+void check_count_reset_button(uint8_t *g0, uint8_t *g1, uint8_t *g2) {
+    if (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET) { // Count reset button pressed
+        delay_ms(50); // Simple debounce
+        if (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET) { // Confirm button press
+            *g0 = 0; // Reset g0
+            *g1 = 0; // Reset g1
+            *g2 = 0; // Reset g2
+            Display_Gray_to_Binary(*g0, *g1, *g2, *g0, *g1, *g2); // Update display
+            while (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET); // Wait for button release
+        }
+    }
+}
+*/
+
+int main(void) {
+    uint8_t b0 = 0, b1 = 0, b2 = 0, g0 = 0, g1 = 0, g2 = 0;
+
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+    SystemCoreClockUpdate();
+    Delay_Init(); // Assuming this function is defined elsewhere
+    GPIO_INIT();
+    lcd_init();
+    //lcd_send_cmd(0x80);  // First row, first column
+    //unsigned char input[16] = "b0 b1 b2";
+    //lcd_send_str(input);
+    //delay_ms(1000);
+
+    while (1) {
+        // Read inputs one by one with delay
+        b0 = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_4);
+        b1 = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_5);
+        b2 = GPIO_ReadInputDataBit(GPIOD, GPIO_Pin_6);
+
+        // Compute Gray code outputs (gray_to_binary)
+        g0 = b0; // Example Gray code input
+        g1 = b1;
+        g2 = b2;
+
+        // Convert Gray code to Binary
+        gray_to_binary(g0, g1, g2, &b0, &b1, &b2);
+
+        // Display Gray code and Binary results
+        Display_Gray_to_Binary(g0, g1, g2, b0, b1, b2);
+
+        // Check for reset button press
+        //check_reset_button();
+        // Check for count reset button press
+        //check_count_reset_button(&g0, &g1, &g2);
+    }
+}
+
+```
+# short video demonstration 
+Project Simulation Video: 
+
+### End of 6th task
+</details>
+
+------------------------------------------------------------------------------------------------------------------
