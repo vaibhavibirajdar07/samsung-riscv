@@ -728,65 +728,76 @@ Reference GitHub repo is [![GitHub](https://img.shields.io/badge/-GitHub-181717?
 
 ------------------------------------------------------------------------------------------------------------------
 <details>
-   <summary><b>Task 5:Overview, Components Required, Operational Workflow, Applications, Circuit Connection, Pinout Diagram and Table for Pin connection required to build the display driver.</summary>
+   <summary><b>Task 5:Overview, Components Required, Operational Workflow, Applications, Circuit Connection, Pinout Diagram and Gray to Binary Table .</summary>
 
-# Digital Object Counter using VSDSquadron Mini
+# **Gray Code to Binary Converter using VSD Squadron and I2C LCD display**
 
-## Overview
-This project implements a microcontroller-based system to convert Gray code to binary and display the result on an I2C LCD. The system reads 3-bit binary inputs from GPIO pins, converts them from Gray code to binary using a custom algorithm, and outputs the results on the LCD. The system also supports optional reset functionality through push buttons. The code utilizes direct I2C communication to control the LCD and uses GPIO for input reading. This application is useful in scenarios such as position sensing, encoders, and digital counters where Gray code is commonly used to minimize errors during transitions.
+## **Overview**
+The Gray Code to Binary Converter is an embedded system designed to convert Gray-coded input signals into their corresponding binary equivalents. Using a high-performance VSD Squadron microcontroller and an I2C LCD, this system provides real-time conversion and display of results. 
 
-## Components Required
-Here is the components list :
+This project is particularly useful in applications such as rotary encoders, digital communication, and error correction systems, where Gray code is commonly used to minimize errors in signal transitions.
 
-Here is the updated table:  
+## **Components Required**
+Here is the components list:
 
-| **S.No** | **Component**              | **Function**                          |  
-|---------|--------------------------|--------------------------------------|  
-| 1       | VSD Squadron Mini Board  | Microcontroller for processing data  |   
-| 2       | I2C LCD Display          | Displays the object count            |  
-| 3       | Push Buttons             | Resets the count when pressed        |  
-| 4       | Power Supply (5V or Battery) | Provides power to the system         |   
+| **S.No** | **Component**              | **Function**                          | **Quantity** |
+|---------|--------------------------|--------------------------------------|------------|
+| 1       | VSD Squadron Microcontroller  | Processes data and controls system  | 1          |
+| 2       | Push Buttons             | Inputs Gray code bits manually      | 3          |
+| 3       | I2C LCD Display          | Displays the converted Binary code  | 1          |
+| 4       | Power Supply (5V or Battery) | Provides power to the system         | 1          |
 
-## Operational Workflow:
-* The microcontroller reads binary inputs representing Gray code from sensors. It then converts the Gray code to binary using the gray_to_binary function. Finally, the binary values are displayed on the LCD for monitoring or further processing.
+## **Operational Workflow**
+* The user inputs a Gray code using push buttons.
+* The microcontroller processes the input and converts the Gray code to binary.
+* The I2C LCD updates in real time to display both Gray and Binary codes.
 
-## Applications:
-* ✔ Gray code to binary conversion is useful in applications like rotary encoders for position sensing, where minimizing errors during bit transitions is critical. It helps decode Gray code outputs into binary for easier interpretation and processing. This is essential in systems like motion control, digital counters, and communication protocols.
+## **Applications**
+* ✔ Rotary Encoders – Used in motor position tracking
+* ✔ Digital Communication – Converts error-resistant Gray code to binary
+* ✔ Industrial Automation – Useful in automation systems that utilize Gray code
+* ✔ Data Encoding & Error Correction – Ensures accurate data interpretation
 
-## Circuit Connection
-## 🔗 Connection Table: Digital Object Counter using VSD Squadron Mini Board  
+## **Circuit Connection**
 
+## 🔗 **Connection Table: Gray Code to Binary Converter using VSD Squadron**  
 
-| **Component**               | **Pin on Component** | **Connected to (VSD Squadron Mini Board)** |
+| **Component**               | **Pin on Component** | **Connected to (VSD Squadron Microcontroller)** |
 |-----------------------------|---------------------|---------------------------------------------|
-| 🟢 **IR Sensor**            | **VCC**             | **5V**                                     |
-|                             | **GND**             | **GND**                                    |
-|                             | **OUT**             | **PD6 (GPIO_Pin_6)**                       |
+| 🔵 **Push Button (Gray Bit 0)**  | **One Terminal**    | **GND**                                     |
+|                             | **Other Terminal**  | **PD4 (GPIO_Pin_4)**                       |
+| 🔵 **Push Button (Gray Bit 1)**  | **One Terminal**    | **GND**                                     |
+|                             | **Other Terminal**  | **PD5 (GPIO_Pin_5)**                       |
+| 🔵 **Push Button (Gray Bit 2)**  | **One Terminal**    | **GND**                                     |
+|                             | **Other Terminal**  | **PD6 (GPIO_Pin_6)**                       |
 | 🟡 **I2C LCD Display (PCF8574)** | **SDA**             | **PC1 (GPIO_Pin_1)**                       |
 |                             | **SCL**             | **PC2 (GPIO_Pin_2)**                       |
 |                             | **VCC**             | **5V**                                     |
 |                             | **GND**             | **GND**                                    |
-| 🔴 **Buzzer**               | **Positive (+)**    | **PD5 (GPIO_Pin_5)**                       |
-|                             | **Negative (-)**    | **GND**                                    |
-| 🔵 **Push Button (Reset)**  | **One Terminal**    | **GND**                                    |
-|                             | **Other Terminal**  | **PD1 (GPIO_Pin_1)**                       |
 
 
+## **Pinout diagram** 
 
-## Pinout Diagram for the project
-The following diagram represents the pin configuration for the Digital Object Counter using the VSD Squadron Mini
-
-![block diagram object counter](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%205/Screenshot%202025-02-17%20223432.png)
+![gray_to_Binary](https://github.com/user-attachments/assets/776cab46-c8a4-40e8-ae42-a8293f658aa8)
 
 
-### End of 5th task
-</details>
+## **Gray to Binary Table**
 
-------------------------------------------------------------------------------------------------------------------
+| **Gray Code** |   |   | **Binary Code** |   |   |
+|--------------|---|---|--------------|---|---|
+| **G₂** | **G₁** | **G₀** | **B₂** | **B₁** | **B₀** |
+| 0 | 0 | 0 | 0 | 0 | 0 |
+| 0 | 0 | 1 | 0 | 0 | 1 |
+| 0 | 1 | 0 | 0 | 1 | 1 |
+| 0 | 1 | 1 | 0 | 1 | 0 |
+| 1 | 0 | 0 | 1 | 1 | 1 |
+| 1 | 0 | 1 | 1 | 1 | 0 |
+| 1 | 1 | 0 | 1 | 0 | 0 |
+| 1 | 1 | 1 | 1 | 0 | 1 |
+
 
 <details>
    <summary><b>Task 6: Working Code & short video demonstration .</summary>
-
 
 ## Code uploaded on the board
 ```
@@ -799,8 +810,6 @@ The following diagram represents the pin configuration for the Digital Object Co
 #define SDA_PIN GPIO_Pin_1
 #define SCL_PIN GPIO_Pin_2
 #define LCD_Address 0x27
-//#define RESET_BUTTON_PIN GPIO_Pin_1 // Pin for the reset button
-//#define COUNT_RESET_BUTTON_PIN GPIO_Pin_0 // Pin for the count reset button
 
 void lcd_send_cmd(unsigned char cmd);
 void lcd_send_data(unsigned char data);
@@ -958,31 +967,6 @@ void Display_Gray_to_Binary(uint8_t g0, uint8_t g1, uint8_t g2, uint8_t b0, uint
     lcd_send_str(output_str);
 }
 
-// Function to check the reset button
-/*void check_reset_button(void) {
-    if (GPIO_ReadInputDataBit(GPIOD, RESET_BUTTON_PIN) == Bit_RESET) { // Reset button pressed
-        delay_ms(50); // Simple debounce
-        lcd_init(); // Reset the LCD
-        lcd_send_cmd(0x80);  // First row, first column
-        unsigned char input[16] = "b0 b1 b2 ";
-        lcd_send_str(input);
-    }
-}
-
-// Function to check the count reset button
-void check_count_reset_button(uint8_t *g0, uint8_t *g1, uint8_t *g2) {
-    if (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET) { // Count reset button pressed
-        delay_ms(50); // Simple debounce
-        if (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET) { // Confirm button press
-            *g0 = 0; // Reset g0
-            *g1 = 0; // Reset g1
-            *g2 = 0; // Reset g2
-            Display_Gray_to_Binary(*g0, *g1, *g2, *g0, *g1, *g2); // Update display
-            while (GPIO_ReadInputDataBit(GPIOD, COUNT_RESET_BUTTON_PIN) == Bit_RESET); // Wait for button release
-        }
-    }
-}
-*/
 
 int main(void) {
     uint8_t b0 = 0, b1 = 0, b2 = 0, g0 = 0, g1 = 0, g2 = 0;
@@ -1013,19 +997,18 @@ int main(void) {
 
         // Display Gray code and Binary results
         Display_Gray_to_Binary(g0, g1, g2, b0, b1, b2);
-
-        // Check for reset button press
-        //check_reset_button();
-        // Check for count reset button press
-        //check_count_reset_button(&g0, &g1, &g2);
     }
 }
-
 ```
+
 # short video demonstration 
-Project Simulation Video: https://drive.google.com/file/d/1-84WceBlgY5TmpUKSx481v58hvPMJxMV/view?usp=drivesdk
+
+Project Simulation Video:  https://drive.google.com/file/d/1-8O0cnozs7bqEK5wsWmAnn29WQpkW66o/view?usp=drive_link
+
 
 ### End of 6th task
 </details>
 
 ------------------------------------------------------------------------------------------------------------------
+
+
