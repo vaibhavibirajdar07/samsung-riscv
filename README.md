@@ -1023,7 +1023,7 @@ int main(void) {
 
 ```
 # short video demonstration 
-Project Simulation Video: 
+Project Simulation Video: https://drive.google.com/file/d/1-8O0cnozs7bqEK5wsWmAnn29WQpkW66o/view?usp=drive_link
 
 ### End of 6th task
 </details>
