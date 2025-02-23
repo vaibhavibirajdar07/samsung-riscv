@@ -87,10 +87,7 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 
 ------------------------------------------------------------------------------------------------------------------
 <details>
-<summary><b>Task 2:</b> Performing SPIKE Simulation and Debugging the C code with Interactive Debugging Mode using Spike.
-	
-I understood the principle and working of the whole program and how various registers like stack pointer and r5 are increasing.
-</summary> 
+<summary><b>Task 2:</b> Performing SPIKE Simulation and Debugging the C code with Interactive Debugging Mode using Spike.</summary> 
 
 
 ### Testing the SPIKE Simulator for sum1ton.c
