@@ -40,7 +40,7 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
    
 ![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/cat%20Command.png)
 
-2. A program is run to obtain risc-v version of the code previously written in c:
+2. A program is run to obtain risc-v version of the code previously written in c i.e -01 format:
 
   	```
 	riscv64-unknown-elf-gcc -O1 -mabi=lp64 -march=rv64i -o sum_1ton.o sum_1ton.c
@@ -55,13 +55,11 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 	riscv64 -unknown-elf-objdump -d sum1ton.o | less
 	```
  
-& we have obtained the required main part to compare the execution in assembly language as shown below :
 
-	
  
 ![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/Objdump%20using%20-O1%20format.png)
 
-4. Open the same terminal and run the given command:
+4. Open the same terminal and run the given command for -0fast format:
  
  	```
 	riscv64-unknown-elf-gcc -Ofast -mabi=lp64 -march=rv64i -o sum_1ton.o sum_1ton.c
@@ -76,10 +74,6 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 	riscv64 -unknown-elf-objdump -d sum1ton.o | less
 	```
  
-& we have obtained the required main part to compare the execution in assembly language as shown below :
-
-
-
 ![image](https://github.com/vaibhavibirajdar07/samsung-riscv/blob/main/task%201/Objdump%20using%20-Ofast%20format.png)
 
 ### End of 1st task
@@ -93,29 +87,22 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 ### Testing the SPIKE Simulator for sum1ton.c
 **spike_O1_objdump**
 
-* Here we are compare both of the compiler that must display the same output on the terminal.
-* after that we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
+* we are gona debug the sum1ton.c of **-O1_format** using SPIKE simulator
 
-![spike_O1_objdump_for_sum1ton](https://github.com/user-attachments/assets/7dd97a0f-66ea-4d65-9358-1d86ed5d97d6)
+![image](https://github.com/user-attachments/assets/881924b7-dab9-4ded-84f2-5dad52df2033)
 
 
-* In the above picture registor a0 earlier has value 21000 in hex decimal.
-* After running the registor a0 became 21180 in hexa decimal.
-* * Because there has +384 in decimal,so after calculation it gives the above value 
 
 **Spike_Ofast_objdump**
 
-* Here also goes the same we compare both of the compiler that must display the same output on the terminal.
-* after that we are gona debug the sum1ton.c of **-Ofast_format** using SPIKE simulator
+* we are gona debug the sum1ton.c of **-Ofast_format** using SPIKE simulator
 
 
 
-![spike_Ofast_objdump_for_sum1ton](https://github.com/user-attachments/assets/9dd161a1-87c4-4966-b8ba-a1156ccd0468)
+![image](https://github.com/user-attachments/assets/3f10225e-b69f-4daf-b2f7-09bee02a8d00)
 
 
-* In the above picture registor sp earlier has value 3ffffffb50 in hex decimal.
-* After running the registor a0 became 3ffffffb40 in hexa decimal.
-* Because there has -16 in decimal,so after calculation it gives the above value.
+
 
 ### Area of a Circle (C program):
 
