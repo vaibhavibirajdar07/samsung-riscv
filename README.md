@@ -99,7 +99,8 @@ this code will be run in terminal to get output as 15 for 1st 5 numbers as shown
 
 
 
-![image](https://github.com/user-attachments/assets/3f10225e-b69f-4daf-b2f7-09bee02a8d00)
+![image](https://github.com/user-attachments/assets/8897d0eb-c06b-4cd5-85b1-68c61bf8a2ac)
+
 
 
 
